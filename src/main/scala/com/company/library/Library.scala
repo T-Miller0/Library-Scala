@@ -1,5 +1,11 @@
 package com.company.library
 
-class Library {
+//object Library {
 
-}
+  class Library {
+    var books: List[Book] = com.company.library.Books.all
+
+    def bookByTitle(title: String): Boolean = books.exists(_.title == title)
+  }
+
+//}
