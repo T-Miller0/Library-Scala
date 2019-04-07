@@ -13,4 +13,8 @@ class SearchSpec extends FunSuite with Matchers {
   test(testName = "search bookByAuthor") {
     newSearch.bookByAuthor("Oliver, Jamie") shouldBe true
   }
+
+  test(testName = "search bookByAuthor") {
+    newSearch.bookByISBN("dbfflaxab") shouldBe true
+  }
 }
