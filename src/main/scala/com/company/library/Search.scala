@@ -1,10 +1,7 @@
 package com.company.library
 
-import scala.collection.mutable.ListBuffer
-
 class Search {
   val books: List[Book] = com.company.library.Books.all
-  val searchedBook = new ListBuffer[Book]
 
   def bookByTitle(string: String): Any = books.filter(_.title == string)
 
