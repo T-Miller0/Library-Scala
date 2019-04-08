@@ -1,12 +1,15 @@
 package com.company.library
 
+import scala.collection.mutable.ListBuffer
+
 class Search {
-  var books: List[Book] = com.company.library.Books.all
+  val books: List[Book] = com.company.library.Books.all
+  val searchedBook = new ListBuffer[Book]
 
-  def bookByTitle(title: String): Boolean = books.exists(_.title == title)
+  def bookByTitle(string: String): Any = books.filter(_.title == string)
 
-  def bookByAuthor(author: String): Boolean = books.exists(_.author == author)
+  def bookByAuthor(author: String): Any = books.filter(_.author == author)
 
-  def bookByISBN(ISBN: String): Boolean = books.exists(_.ISBN == ISBN)
+  def bookByISBN(ISBN: String): Any = books.filter(_.ISBN == ISBN)
 
 }
