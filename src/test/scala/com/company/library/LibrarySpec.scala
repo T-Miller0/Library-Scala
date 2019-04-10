@@ -7,7 +7,7 @@ class LibrarySpec extends FunSuite with Matchers {
   val myLibrary = new Library()
 
    test(testName = "check if bookAvailable") {
-     myLibrary.searchBook("About a Boy") should contain; "Hornby, Nick"
+    myLibrary.searchBook("About a Boy") should contain; "Hornby, Nick"
    }
 
   test(testName = "BookLoan adds book to list") {
@@ -15,9 +15,9 @@ class LibrarySpec extends FunSuite with Matchers {
   }
 
   test(testName = "See if book is available") {
-    myLibrary.bookAvailable(string = "Da Vinci Code,The") shouldBe "Book available, Da Vinci Code,The"
+     myLibrary.bookAvailable(string = "Eclipse") shouldBe true
   }
   test(testName = "add book to referencedBooks list") {
-    myLibrary.addReferencedBook(string = "Twilight") should contain; "Twilight, Meyer, Stephenie, yqykgn"
+    myLibrary.addReferencedBook(string = "Twilight") should be; "ListBuffer((List(Book(Twilight,Meyer, Stephenie,yqykgn)),List(),List()))"
   }
  }
