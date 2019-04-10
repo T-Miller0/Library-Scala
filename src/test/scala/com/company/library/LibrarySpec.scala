@@ -7,11 +7,16 @@ class LibrarySpec extends FunSuite with Matchers {
   val myLibrary = new Library()
 
    test(testName = "check if bookAvailable") {
-    myLibrary.searchBook("About a Boy") should contain; "Hornby, Nick"
+    myLibrary.searchBook("About a Boy") should be; "Hornby, Nick"
    }
 
   test(testName = "BookLoan adds book to list") {
-    myLibrary.bookLoan(string = "About a Boy") should contain; "About a Boy,Hornby Nick,fmagkdj"
+    myLibrary.bookLoan(string = "About a Boy") should be; "About a Boy,Hornby Nick,fmagkdj"
+  }
+
+  test(testName = "A BookLoan is unavailable") {
+    myLibrary.bookLoan(string = "ewvxsoql")
+    myLibrary.bookLoan(string = "Lost Symbol,The") should be; "Book is Unavailable"
   }
 
   test(testName = "See if book is available") {
