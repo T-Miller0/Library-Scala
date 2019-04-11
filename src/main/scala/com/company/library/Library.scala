@@ -7,18 +7,30 @@ class Library {
   val books: List[Book] = com.company.library.Books.all
   var loanedBooks = new ListBuffer[List[Book]]()
   var referencedBooks = new ListBuffer[List[Book]]()
+  var loanedDetails = new ListBuffer[Any]()
+
 
   def searchBook(string: String): List[Book] = newSearch.bookByTitle(string, books) ++
       newSearch.bookByAuthor(string, books) ++ newSearch.bookByISBN(string, books)
 
-   def bookLoan(string: String): Any = if (bookAvailable(string)) {
-     loanedBooks += searchBook(string) }
+  def visitorNameToBook(desiredBook: String, name: String): Any = searchBook(desiredBook).head + name
+
+
+  def bookLoan(book: String, name: String): Any = if (bookAvailable(book)) {
+    loanedDetails += visitorNameToBook(book, name)
+    (loanedBooks += searchBook(book)).toList }
     else {"Book is Unavailable" }
 
-   def bookAvailable(string: String): Boolean = {
-     val unavailableBooks = referencedBooks.flatten.toList ++ loanedBooks.flatten.toList
+  def bookAvailable(string: String): Boolean = {
+    val unavailableBooks = referencedBooks.flatten.toList ++ loanedBooks.flatten.toList
      (newSearch.bookByTitle(string, unavailableBooks) ++ newSearch.bookByAuthor(string, unavailableBooks) ++
        newSearch.bookByISBN(string, unavailableBooks)).isEmpty}
 
-   def addReferencedBook(string: String): Any = (referencedBooks += searchBook(string)).flatten
-  }
+  def addReferencedBook(string: String): Any = (referencedBooks += searchBook(string)).flatten.toList
+
+  def returnedBook(string: String, name: String): Any = { loanedBooks -= searchBook(string)
+  removeFromDetailsList(string, name) }
+
+  def removeFromDetailsList(string: String, name: String): Any = (loanedDetails -= visitorNameToBook(string, name)).toList
+
+}

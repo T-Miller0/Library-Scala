@@ -16,6 +16,6 @@ class SearchSpec extends FunSuite with Matchers {
   }
 
   test(testName = "search bookByISBN") {
-    newSearch.bookByISBN("dbfflaxab", books) shouldBe List(    Book("Hunger Games,The:Hunger Games Trilogy", "Collins, Suzanne", "dbfflaxab"))
+    newSearch.bookByISBN("dbfflaxab", books) shouldBe List(Book("Hunger Games,The:Hunger Games Trilogy", "Collins, Suzanne", "dbfflaxab"))
   }
 }
