@@ -1,5 +1,7 @@
 package com.company.library
 
+import java.time.format.DateTimeFormatter
+
 import scala.collection.mutable.ListBuffer
 
 class Library {
@@ -13,11 +15,9 @@ class Library {
   def searchBook(string: String): List[Book] = newSearch.bookByTitle(string, books) ++
       newSearch.bookByAuthor(string, books) ++ newSearch.bookByISBN(string, books)
 
-  def visitorNameToBook(desiredBook: String, name: String): Any = searchBook(desiredBook).head + name
-
-
   def bookLoan(book: String, name: String): Any = if (bookAvailable(book)) {
     loanedDetails += visitorNameToBook(book, name)
+//    + ListBuffer(returnTime).toList
     (loanedBooks += searchBook(book)).toList }
     else {"Book is Unavailable" }
 
@@ -33,4 +33,11 @@ class Library {
 
   def removeFromDetailsList(string: String, name: String): Any = (loanedDetails -= visitorNameToBook(string, name)).toList
 
+  def visitorNameToBook(desiredBook: String, name: String): Any = searchBook(desiredBook).head + name
+
+  def returnTime: String = {
+    val formatter = DateTimeFormatter.ofPattern("dd-mm-yy HH:mm")
+    val newTime = java.time.LocalDateTime.now.plusDays(3)
+    newTime.format(formatter)
+  }
 }
